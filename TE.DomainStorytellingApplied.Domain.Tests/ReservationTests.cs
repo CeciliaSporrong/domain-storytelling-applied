@@ -12,13 +12,11 @@ public class ReservationTests
         var bookerId = Id.Generate();
         var premisesId = Id.Generate();
 
-        var reservation = new Reservation
-        {
-            ReservationId = reservationId,
-            TimeslotId = timeslotId,
-            BookerId = bookerId,
-            PremisesId = premisesId
-        };
+        var reservation = new Reservation(
+            reservationId,
+            timeslotId,
+            bookerId,
+            premisesId);    
 
         reservation.ReservationId.ShouldBe(reservationId);
         reservation.TimeslotId.ShouldBe(timeslotId);

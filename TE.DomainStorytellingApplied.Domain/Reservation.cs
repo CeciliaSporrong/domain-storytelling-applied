@@ -6,4 +6,12 @@ public class Reservation
     public Id TimeslotId { get; init; }
     public Id BookerId { get; init; }
     public Id PremisesId { get; init; }
+
+    public Reservation(Id reservationId, Id timeslotId, Id bookerId, Id premisesId)
+    {
+        ReservationId = reservationId;
+        TimeslotId = timeslotId;
+        BookerId = bookerId;
+        PremisesId = premisesId;
+    }
 }
