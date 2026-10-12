@@ -14,4 +14,7 @@ public class Reservation
         BookerId = bookerId;
         PremisesId = premisesId;
     }
+
+    public static Reservation Book(Id timeslotId, Id bookerId, Id premisesId) =>
+        new(Id.Generate(), timeslotId, bookerId, premisesId);
 }
