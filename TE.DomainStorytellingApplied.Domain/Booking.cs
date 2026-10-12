@@ -1,20 +1,20 @@
 namespace TE.DomainStorytellingApplied.Domain;
 
-public class Reservation
+public class Booking
 {
-    public Id ReservationId { get; init; }
+    public Id BookingId { get; init; }
     public Id TimeslotId { get; init; }
     public Id BookerId { get; init; }
     public Id PremisesId { get; init; }
 
-    public Reservation(Id reservationId, Id timeslotId, Id bookerId, Id premisesId)
+    public Booking(Id bookingId, Id timeslotId, Id bookerId, Id premisesId)
     {
-        ReservationId = reservationId;
+        BookingId = bookingId;
         TimeslotId = timeslotId;
         BookerId = bookerId;
         PremisesId = premisesId;
     }
 
-    public static Reservation Book(Id timeslotId, Id bookerId, Id premisesId) =>
+    public static Booking Book(Id timeslotId, Id bookerId, Id premisesId) =>
         new(Id.Generate(), timeslotId, bookerId, premisesId);
 }

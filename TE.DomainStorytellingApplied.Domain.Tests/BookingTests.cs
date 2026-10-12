@@ -2,7 +2,7 @@ using TE.DomainStorytellingApplied.Domain;
 
 namespace TE.DomainStorytellingApplied.Domain.Tests;
 
-public class ReservationTests
+public class BookingTests
 {
     [Fact]
     public void GivenValidIds_WhenBooking_ShouldKeepAllIds()
@@ -11,33 +11,33 @@ public class ReservationTests
         var bookerId = Id.Generate();
         var premisesId = Id.Generate();
 
-        var reservation = Reservation.Book(timeslotId, bookerId, premisesId);
+        var booking = Booking.Book(timeslotId, bookerId, premisesId);
 
-        reservation.ReservationId.ShouldNotBeNull();
-        reservation.TimeslotId.ShouldBe(timeslotId);
-        reservation.BookerId.ShouldBe(bookerId);
-        reservation.PremisesId.ShouldBe(premisesId);
+        booking.BookingId.ShouldNotBeNull();
+        booking.TimeslotId.ShouldBe(timeslotId);
+        booking.BookerId.ShouldBe(bookerId);
+        booking.PremisesId.ShouldBe(premisesId);
     }
 
     [Fact]
-    public void GivenAvailableTimeslot_WhenBookingThroughService_ShouldCreateReservation()
+    public void GivenAvailableTimeslot_WhenBookingThroughService_ShouldCreateBooking()
     {
-        var service = new ReservationService();
+        var service = new BookingService();
         var timeslotId = Id.Generate();
         var bookerId = Id.Generate();
         var premisesId = Id.Generate();
 
-        var reservation = service.Book(timeslotId, bookerId, premisesId);
+        var booking = service.Book(timeslotId, bookerId, premisesId);
 
-        reservation.TimeslotId.ShouldBe(timeslotId);
-        reservation.BookerId.ShouldBe(bookerId);
-        reservation.PremisesId.ShouldBe(premisesId);
+        booking.TimeslotId.ShouldBe(timeslotId);
+        booking.BookerId.ShouldBe(bookerId);
+        booking.PremisesId.ShouldBe(premisesId);
     }
 
     [Fact]
     public void GivenBookedTimeslot_WhenBookingAgain_ShouldThrow()
     {
-        var service = new ReservationService();
+        var service = new BookingService();
         var timeslotId = Id.Generate();
 
         service.Book(timeslotId, Id.Generate(), Id.Generate());
