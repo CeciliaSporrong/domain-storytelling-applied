@@ -12,13 +12,11 @@ public class ReservationService
         if (_reservations.Any(reservation => reservation.PremisesId == premisesId))
             throw new Exception("The premises is already booked");
 
-        var reservation = new Reservation
-        {
-            ReservationId = Id.Generate(),
-            TimeslotId = timeslotId,
-            BookerId = bookerId,
-            PremisesId = premisesId
-        };
+        var reservation = new Reservation(
+            Id.Generate(),
+            timeslotId,
+            bookerId,
+            premisesId);
 
         _reservations.Add(reservation);
         return reservation;
