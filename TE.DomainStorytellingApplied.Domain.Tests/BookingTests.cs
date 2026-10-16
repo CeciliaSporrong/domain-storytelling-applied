@@ -23,7 +23,7 @@ public class BookingTests
         var service = new BookingService();
         var premises = CreatePremises();
         var timeslot = CreateTimeslot(premises.PremisesId);
-        var booker = new Booker(Id.Generate(), "Anna Andersson");
+        var booker = new Booker(Id.Generate(), BookerName.Create("Anna Andersson"));
 
         var booking = service.Book(timeslot, booker, premises, 8, ["Projector"]);
 
@@ -37,7 +37,7 @@ public class BookingTests
         var service = new BookingService();
         var premises = CreatePremises();
         var timeslot = CreateTimeslot(premises.PremisesId);
-        var booker = new Booker(Id.Generate(), "Anna Andersson");
+        var booker = new Booker(Id.Generate(), BookerName.Create("Anna Andersson"));
 
         service.Book(timeslot, booker, premises, 8, []);
 
@@ -58,7 +58,7 @@ public class BookingTests
     public void GivenTooManyAttendees_WhenBooking_ShouldThrow()
     {
         var premises = CreatePremises();
-        var booker = new Booker(Id.Generate(), "Anna Andersson");
+        var booker = new Booker(Id.Generate(), BookerName.Create("Anna Andersson"));
 
         Should.Throw<InvalidOperationException>(() =>
             new BookingService().Book(CreateTimeslot(premises.PremisesId), booker, premises, 13, []));
@@ -68,14 +68,19 @@ public class BookingTests
     public void GivenMissingEquipment_WhenBooking_ShouldThrow()
     {
         var premises = CreatePremises();
-        var booker = new Booker(Id.Generate(), "Anna Andersson");
+        var booker = new Booker(Id.Generate(), BookerName.Create("Anna Andersson"));
 
         Should.Throw<InvalidOperationException>(() =>
             new BookingService().Book(CreateTimeslot(premises.PremisesId), booker, premises, 8, ["Video conference"]));
     }
 
     private static Premises CreatePremises() =>
-        new(Id.Generate(), "Conference Room", "Main Street 1", 12, ["Projector", "Whiteboard"]);
+        new(
+            Id.Generate(),
+            PremisesName.Create("Conference Room"),
+            Address.Create("Main Street 1"),
+            Capacity.Create(12),
+            ["Projector", "Whiteboard"]);
 
     private static Timeslot CreateTimeslot(Id premisesId) =>
         new(Id.Generate(), premisesId, DateTimeOffset.UtcNow, DateTimeOffset.UtcNow.AddHours(1));
