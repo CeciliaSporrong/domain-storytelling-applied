@@ -8,16 +8,9 @@ public class BookerTests
     public void GivenValidDetails_WhenCreating_ShouldKeepDetails()
     {
         var bookerId = Id.Generate();
-        var booker = new Booker(bookerId, "Anna Andersson");
+        var booker = new Booker(bookerId, BookerName.Create("Anna Andersson"));
 
         booker.BookerId.ShouldBe(bookerId);
-        booker.Name.ShouldBe("Anna Andersson");
-    }
-
-    [Fact]
-    public void GivenEmptyName_WhenCreating_ShouldThrow()
-    {
-        Should.Throw<ArgumentException>(() =>
-            new Booker(Id.Generate(), ""));
+        booker.Name.ShouldBe(BookerName.Create("Anna Andersson"));
     }
 }

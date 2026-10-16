@@ -14,7 +14,7 @@ public class BookingService
         if (booker is null)
             throw new InvalidOperationException("The booker does not exist");
 
-        if (numberOfAttendees > premises.Capacity)
+        if (numberOfAttendees > premises.Capacity.Value)
             throw new InvalidOperationException("The premises does not have enough capacity");
 
         if (requiredEquipment.Any(item => !premises.Equipment.Contains(item)))
